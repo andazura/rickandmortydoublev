@@ -24,6 +24,9 @@ class _Pages extends StatelessWidget {
     return Scaffold(
       body: PageView(
         controller: bottomModel.pageController,
+        onPageChanged: (value) {
+          bottomModel.changePageoutAnimation(value);
+        },
         children: [
           const CharactersScreen(),
           const LocationsScreen(),
@@ -64,6 +67,11 @@ class _BottomNavigationModel extends ChangeNotifier {
   int get paginaActual => _currentIndex;
 
   final PageController _pageController = PageController();
+
+  changePageoutAnimation(int valor) {
+    _currentIndex = valor;
+    notifyListeners();
+  }
 
   set paginaActual(int valor) {
     _currentIndex = valor;
